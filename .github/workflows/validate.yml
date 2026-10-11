@@ -1,0 +1,104 @@
+name: Validate agents
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+
+      - name: Agent definitions
+        run: python3 scripts/validate_agents.py
+
+      - name: Sync rules
+        run: python3 scripts/test_sync.py
+
+      - name: Settings
+        run: python3 scripts/test_settings.py
+
+      - name: MCP server sign-in
+        run: python3 scripts/test_mcp_server.py
+
+      - name: Risk hook
+        run: python3 scripts/test_risk_hook.py
+
+      - name: Shell syntax
+        run: |
+          bash -n scripts/sync-agents.sh
+          bash -n scripts/install.sh
+
+      - name: Installer smoke test
+        run: |
+          git branch -f ci-install-test HEAD
+          export HOME="$(mktemp -d)" CLAUDE_AGENTS_REPO="$PWD" CLAUDE_AGENTS_BRANCH=ci-install-test
+          agents=$(ls *.md | grep -vx README.md | wc -l)
+
+          # Without CLAUDE_TOOLS the installer hooks up the router-free default (the risk check),
+          # which needs a signed-in server; with no server, and no sync hook by default, no hook is written.
+          bash scripts/install.sh </dev/null
+          bash scripts/install.sh </dev/null   # a re-run must not duplicate anything
+          test "$(ls "$HOME"/.claude/agents/*.md | wc -l)" = "$agents"
+          test ! -e "$HOME/.claude/settings.json"
+          test "$(grep -c 'setup/routing-rules.md' "$HOME/.claude/CLAUDE.md")" = 1
+
+          # The router and the risk check can't be combined, in either order, and nothing changes.
+          for tools in router,risk risk,router; do
+            if CLAUDE_TOOLS=$tools bash scripts/install.sh </dev/null 2>"$HOME/refused"; then exit 1; fi
+            grep -q "can't be used together" "$HOME/refused"
+            grep -q "CLAUDE_TOOLS=router or CLAUDE_TOOLS=risk" "$HOME/refused"
+            test ! -e "$HOME/.claude/settings.json"
+          done
+
+          # The router, then the risk check, with a stand-in for the claude CLI that reports the server as connected.
+          mkdir "$HOME/bin"
+          printf '#!/bin/sh\n[ "$1 $2" != "mcp list" ] || echo "liz: https://example.com (HTTP) - Connected"\n' > "$HOME/bin/claude"
+          chmod +x "$HOME/bin/claude"
+          PATH="$HOME/bin:$PATH" CLAUDE_TOOLS=router bash scripts/install.sh </dev/null
+          test "$(jq -r '.hooks.UserPromptSubmit[0].hooks[0].type' "$HOME/.claude/settings.json")" = mcp_tool
+          test "$(jq '.hooks.UserPromptSubmit[0].hooks[0].input.agents | length' "$HOME/.claude/settings.json")" = "$agents"
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["UserPromptSubmit"]'
+          PATH="$HOME/bin:$PATH" bash scripts/install.sh </dev/null   # the default is the risk check, and drops the router
+          test "$(jq -c '[.hooks.PreToolUse[].hooks[].tool]' "$HOME/.claude/settings.json")" = '["p1-gozcu-is_risky"]'
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse"]'
+          PATH="$HOME/bin:$PATH" CLAUDE_TOOLS=router bash scripts/install.sh </dev/null   # a tool left out is removed
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["UserPromptSubmit"]'
+          PATH="$HOME/bin:$PATH" CLAUDE_TOOLS=risk bash scripts/install.sh </dev/null | tee "$HOME/out"
+          grep -q "sync hook was left out" "$HOME/out"
+          grep -q "re-run the installer" "$HOME/out"
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse"]'
+
+          # CLAUDE_SESSION_SYNC=true adds the sync hook, and false removes it again; the agents are still copied.
+          before=$(jq -c . "$HOME/.claude/settings.json")
+          if CLAUDE_SESSION_SYNC=maybe bash scripts/install.sh </dev/null 2>"$HOME/refused"; then exit 1; fi
+          grep -q "CLAUDE_SESSION_SYNC must be true or false" "$HOME/refused"
+          test "$(jq -c . "$HOME/.claude/settings.json")" = "$before"
+          PATH="$HOME/bin:$PATH" CLAUDE_SESSION_SYNC=true bash scripts/install.sh </dev/null
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse","SessionStart"]'
+          PATH="$HOME/bin:$PATH" bash scripts/install.sh </dev/null   # an unset value keeps the earlier choice
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse","SessionStart"]'
+          PATH="$HOME/bin:$PATH" CLAUDE_SESSION_SYNC=false bash scripts/install.sh </dev/null
+          test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse"]'
+          test "$(ls "$HOME"/.claude/agents/*.md | wc -l)" = "$agents"
+          PATH="$HOME/bin:$PATH" CLAUDE_SESSION_SYNC=true bash scripts/install.sh </dev/null   # uninstall with the hook
+
+          bash "$HOME/.claude/claude-agents/scripts/install.sh" --uninstall
+          test -z "$(ls "$HOME/.claude/agents")"
+          test "$(jq -c . "$HOME/.claude/settings.json")" = "{}"
+          test ! -e "$HOME/.claude/claude-agents"
+
+          # Uninstalling an install made without the sync hook.
+          CLAUDE_TOOLS=none bash scripts/install.sh </dev/null
+          test "$(jq -c '.hooks // {}' "$HOME/.claude/settings.json")" = "{}"
+          test "$(ls "$HOME"/.claude/agents/*.md | wc -l)" = "$agents"
+          bash "$HOME/.claude/claude-agents/scripts/install.sh" --uninstall
+          test -z "$(ls "$HOME/.claude/agents")"
+          test "$(jq -c . "$HOME/.claude/settings.json")" = "{}"
+          test ! -e "$HOME/.claude/claude-agents"
