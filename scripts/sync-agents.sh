@@ -84,7 +84,7 @@ main() {
   if [ "$(git -C "$repo" config --get claude-agents.router || true)" = "mcp" ]; then
     python3 "$repo/scripts/settings_hooks.py" refresh --repo "$repo" \
       --server "$(git -C "$repo" config --get claude-agents.router-server || echo liz)" \
-      --tool "$(git -C "$repo" config --get claude-agents.router-tool || echo p1-gozcu-router)" \
+      --tool "$(git -C "$repo" config --get claude-agents.router-tool || echo p2-gozcu-router)" \
       --agents "$(git -C "$repo" config --get claude-agents.router-agents || echo all)" 2>&1 >/dev/null | sed 's/^/agent sync: /' >&2
   fi
 }

@@ -66,7 +66,7 @@ jobs:
           test "$(jq '.hooks.UserPromptSubmit[0].hooks[0].input.agents | length' "$HOME/.claude/settings.json")" = "$agents"
           test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["UserPromptSubmit"]'
           PATH="$HOME/bin:$PATH" bash scripts/install.sh </dev/null   # the default is the risk check, and drops the router
-          test "$(jq -c '[.hooks.PreToolUse[].hooks[].tool]' "$HOME/.claude/settings.json")" = '["p1-gozcu-is_risky"]'
+          test "$(jq -c '[.hooks.PreToolUse[].hooks[].tool]' "$HOME/.claude/settings.json")" = '["p2-gozcu-is_risky"]'
           test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["PreToolUse"]'
           PATH="$HOME/bin:$PATH" CLAUDE_TOOLS=router bash scripts/install.sh </dev/null   # a tool left out is removed
           test "$(jq -c '.hooks | keys' "$HOME/.claude/settings.json")" = '["UserPromptSubmit"]'
