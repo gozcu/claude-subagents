@@ -12,7 +12,7 @@
 Clone first if you'd like to read the script before running it:
 
 ```bash
-git clone https://github.com/gozcu/claude-agents-.git ~/.claude/claude-agents
+git clone https://github.com/gozcu/claude-subagents.git ~/.claude/claude-agents
 ~/.claude/claude-agents/scripts/install.sh
 ```
 
@@ -42,7 +42,7 @@ CLAUDE_TOOLS=router CLAUDE_ROUTER_AGENTS="quick-fixer implementer debugger" ~/.c
 To try your own changes before pushing them, install from your local checkout:
 
 ```bash
-cd ~/Projects/claude-agents
+cd ~/Projects/claude-subagents
 CLAUDE_AGENTS_REPO="$PWD" CLAUDE_AGENTS_BRANCH=my-branch ./scripts/install.sh
 ```
 

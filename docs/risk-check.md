@@ -12,7 +12,7 @@ To use the hook without installing the agents or cloning the repo, download the 
 
 ```bash
 d=$(mktemp -d) && for f in risk_hook mcp_server settings_hooks deploy_agents; do
-  curl -fsSL "https://raw.githubusercontent.com/gozcu/claude-agents-/main/scripts/$f.py" -o "$d/$f.py" || break
+  curl -fsSL "https://raw.githubusercontent.com/gozcu/claude-subagents/main/scripts/$f.py" -o "$d/$f.py" || break
 done && python3 "$d/risk_hook.py" install
 ```
 

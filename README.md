@@ -16,13 +16,13 @@ With `CLAUDE_TOOLS=none` nothing is sent. The installer and the optional session
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gozcu/claude-agents-/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/gozcu/claude-subagents/main/scripts/install.sh | bash
 ```
 
 This installs the agents and the risk check. Your browser opens to sign in to status402; then restart Claude Code. It needs Claude Code, `git`, `python3` and a status402 account. To choose the tool, set `CLAUDE_TOOLS` on `bash`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gozcu/claude-agents-/main/scripts/install.sh | CLAUDE_TOOLS=router bash
+curl -fsSL https://raw.githubusercontent.com/gozcu/claude-subagents/main/scripts/install.sh | CLAUDE_TOOLS=router bash
 ```
 
 `risk` is the default, `router` installs the prompt router instead, and `none` installs the agents only. The router and the risk check can't be combined: the risk check stops the subagents the router delegates to. Re-run the installer to update the agents or switch tools.
