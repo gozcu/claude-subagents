@@ -25,7 +25,7 @@ You can re-run the installer at any time; it only changes what's needed, and opt
 | `CLAUDE_TOOLS` | `risk` | The status402 tool to hook up: `risk` for [the risk check](risk-check.md) or `router` for the prompt router, not both. The one you leave out is removed if an earlier run added it. `none` installs the agents only |
 | `CLAUDE_ROUTER_AGENTS` | `all` | Router only: the agents it may choose, by name, such as `"quick-fixer implementer debugger"` |
 | `CLAUDE_ROUTER_SERVER` | `liz` | MCP server name, for the router and the risk check. A claude.ai connector name, such as `"claude.ai liz"`, uses that connector instead |
-| `CLAUDE_ROUTER_TOOL` | `p1-gozcu-router` | Router tool name |
+| `CLAUDE_ROUTER_TOOL` | `p2-gozcu-router` | Router tool name |
 | `CLAUDE_SESSION_SYNC` | `false` | `true` adds the session-start sync hook, which updates the agents at every session start; see [the session-start sync](#the-session-start-sync) |
 | `CLAUDE_RISK_NO_DENY` | `true` | Risk check: `true` asks you to confirm high-risk calls, `false` blocks them |
 | `STATUS402_MCP_URL` | the veryliz endpoint | MCP endpoint, `https://platform.status402.io/mcp/paid/veryliz/scope/dev/gozcu` |
@@ -86,7 +86,7 @@ The sync then pulls from your checkout, and only sees committed changes. If you'
              {
                "type": "mcp_tool",
                "server": "liz",
-               "tool": "p1-gozcu-router",
+               "tool": "p2-gozcu-router",
                "input": {
                  "prompt": "${prompt}",
                  "agents": {

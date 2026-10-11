@@ -36,7 +36,7 @@
 #                          default: all. Descriptions are read from the agents' MD files.
 #   CLAUDE_ROUTER_SERVER   MCP server name (default: liz). A claude.ai connector name such
 #                          as "claude.ai liz" uses that connector instead.
-#   CLAUDE_ROUTER_TOOL     router tool (default: p1-gozcu-router)
+#   CLAUDE_ROUTER_TOOL     router tool (default: p2-gozcu-router)
 #   CLAUDE_SESSION_SYNC    false (default): no SessionStart hook (removed if an earlier run added
 #                          it); the agents are copied once by the installer, and update only when
 #                          you re-run it or run scripts/sync-agents.sh by hand. true: the hook
@@ -153,7 +153,7 @@ do_install() {
 
   router_agents="$(option "${CLAUDE_ROUTER_AGENTS:-}" router-agents all)"
   router_server="$(option "${CLAUDE_ROUTER_SERVER:-}" router-server liz)"
-  router_tool="$(option "${CLAUDE_ROUTER_TOOL:-}" router-tool p1-gozcu-router)"
+  router_tool="$(option "${CLAUDE_ROUTER_TOOL:-}" router-tool p2-gozcu-router)"
   mcp_url="$(option "${STATUS402_MCP_URL:-}" mcp-url "$DEFAULT_MCP_URL")"
   git -C "$dir" config claude-agents.router "$router"
   git -C "$dir" config claude-agents.router-agents "$router_agents"
@@ -217,7 +217,7 @@ do_uninstall() {
     have_checkout=1
   fi
   router_server="$(option "" router-server liz)"
-  router_tool="$(option "" router-tool p1-gozcu-router)"
+  router_tool="$(option "" router-tool p2-gozcu-router)"
   risk="$(option "" risk-hook off)"
 
   echo "1/4 Agents"

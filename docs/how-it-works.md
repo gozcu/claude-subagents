@@ -4,8 +4,8 @@
 |---|---|---|
 | Agents | `*.md` at the repo root | Each one sets a model, an effort level, tools and instructions |
 | Sync hook | `scripts/sync-agents.sh` | Opt-in ([`CLAUDE_SESSION_SYNC=true`](installer.md#the-session-start-sync)). Runs at session start, updates the checkout, copies the agents into `~/.claude/agents/`, and refreshes the router's agent list |
-| Risk check | `p1-gozcu-is_risky` on the status402 MCP server | The default. Runs before every shell command and file write or edit, and asks you to confirm high-risk ones |
-| Router hook | `p1-gozcu-router` on the status402 MCP server | Opt-in (`CLAUDE_TOOLS=router`). Runs on every prompt and returns a short note naming the agent that matches |
+| Risk check | `p2-gozcu-is_risky` on the status402 MCP server | The default. Runs before every shell command and file write or edit, and asks you to confirm high-risk ones |
+| Router hook | `p2-gozcu-router` on the status402 MCP server | Opt-in (`CLAUDE_TOOLS=router`). Runs on every prompt and returns a short note naming the agent that matches |
 | Routing rules | `setup/routing-rules.md` | Imported into `~/.claude/CLAUDE.md`; tells Claude to delegate when the router adds a note |
 
 With the router installed, a prompt goes like this:

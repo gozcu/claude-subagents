@@ -26,7 +26,7 @@ authentication gets the same sign-in.
 Options:
   --server NAME   MCP server the tool lives on. Default: the first of
                   "claude.ai liz" and "liz" that is registered, else "liz"
-  --tool NAME     risk tool (default: p1-gozcu-is_risky)
+  --tool NAME     risk tool (default: p2-gozcu-is_risky)
   --matcher RE    tools to check (default: Bash|Edit|Write|MultiEdit|NotebookEdit)
   --url URL       MCP endpoint, used when registering the server
 """
@@ -43,7 +43,7 @@ from settings_hooks import SettingsError, handlers, load, remove, save  # noqa: 
 HOME = pathlib.Path.home()
 EVENT = "PreToolUse"
 SERVERS = ("claude.ai liz", "liz")
-ROUTER_TOOL = "p1-gozcu-router"  # the router's default tool name; see settings_hooks.py
+ROUTER_TOOL = "p2-gozcu-router"  # the router's default tool name; see settings_hooks.py
 MATCHER = "Bash|Edit|Write|MultiEdit|NotebookEdit"  # MultiEdit only exists in older Claude Code versions
 # What is_risky gets to judge: the tool, then its command or the file it changes, then the
 # text it writes. Each tool sets only some of these fields; Claude Code renders the others
@@ -143,7 +143,7 @@ def main():
     parser.add_argument("--settings", type=pathlib.Path, default=HOME / ".claude" / "settings.json")
     parser.add_argument("--no-deny", type=parse_bool, metavar="true|false")
     parser.add_argument("--server")
-    parser.add_argument("--tool", default="p1-gozcu-is_risky")
+    parser.add_argument("--tool", default="p2-gozcu-is_risky")
     parser.add_argument("--matcher", default=MATCHER)
     parser.add_argument("--url", default=os.environ.get("STATUS402_MCP_URL") or DEFAULT_MCP_URL)
     args = parser.parse_args()

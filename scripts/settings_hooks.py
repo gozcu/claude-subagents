@@ -15,7 +15,7 @@ refresh    rebuilds the MCP router's agent list from the agent MD files. The syn
 
 Router options:
   --server NAME      MCP server the router tool lives on (default: liz)
-  --tool NAME        router tool (default: p1-gozcu-router)
+  --tool NAME        router tool (default: p2-gozcu-router)
   --agents LIST      "all" (every agent in --repo) or agent names, comma- or space-separated
   --repo DIR         the checkout; "all" means every agent at its root
   --agents-dir DIR   where to read agent MD files (default: ~/.claude/agents)
@@ -254,7 +254,7 @@ def main():
     parser.add_argument("--router", choices=["mcp", "off"], default="mcp")
     parser.add_argument("--sync", choices=["on", "off"], default="on")
     parser.add_argument("--server", default="liz")
-    parser.add_argument("--tool", default="p1-gozcu-router")
+    parser.add_argument("--tool", default="p2-gozcu-router")
     parser.add_argument("--agents", default="all")
     parser.add_argument("--repo", type=pathlib.Path)
     parser.add_argument("--agents-dir", type=pathlib.Path, default=HOME / ".claude" / "agents")

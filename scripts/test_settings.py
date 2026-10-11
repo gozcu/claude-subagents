@@ -70,7 +70,7 @@ def mcp_router_shape(s):
     check("router is an mcp_tool hook", router["type"] == "mcp_tool")
     check("router has only supported fields", set(router) == {"type", "server", "tool", "input", "timeout"},
           str(sorted(router)))
-    check("router defaults", (router["server"], router["tool"]) == ("liz", "p1-gozcu-router"))
+    check("router defaults", (router["server"], router["tool"]) == ("liz", "p2-gozcu-router"))
     check("prompt is substituted by Claude Code", router["input"]["prompt"] == "${prompt}")
     check("only the named agents are sent", list(router["input"]["agents"]) == ["quick-fixer", "implementer"])
     check("descriptions come from the MD files",

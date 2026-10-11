@@ -123,7 +123,7 @@ def uses_the_connector(s):
     groups = s.groups()
     check("one mcp_tool hook on the connector", len(groups) == 1 and [
         {k: h.get(k) for k in ("type", "server", "tool")} for h in groups[0]["hooks"]] == [
-        {"type": "mcp_tool", "server": "claude.ai liz", "tool": "p1-gozcu-is_risky"}], str(groups))
+        {"type": "mcp_tool", "server": "claude.ai liz", "tool": "p2-gozcu-is_risky"}], str(groups))
     hook_input = groups[0]["hooks"][0]["input"]
     check("no_deny defaults to true", hook_input.get("no_deny") is True, str(hook_input))
     for tool, tool_input, expected in TOOL_CALLS:
@@ -214,7 +214,7 @@ def keeps_other_hooks(s):
 @scenario
 def warns_when_the_router_is_installed(s):
     s.listing.write_text(CONNECTOR, encoding="utf-8")
-    router = {"hooks": [{"type": "mcp_tool", "server": "liz", "tool": "p1-gozcu-router"}]}
+    router = {"hooks": [{"type": "mcp_tool", "server": "liz", "tool": "p2-gozcu-router"}]}
     s.settings.parent.mkdir(parents=True)
     s.settings.write_text(json.dumps({"hooks": {"UserPromptSubmit": [router]}}))
     r = s.run("install")
