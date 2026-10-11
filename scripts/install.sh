@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Sets up the shared Claude Code agents, and the status402 risk check or prompt router.
 #
-#   curl -fsSL https://raw.githubusercontent.com/gozcu/claude-agents-/main/scripts/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/gozcu/claude-subagents/main/scripts/install.sh | bash
 #
 #   1. Clones this repo into ~/.claude/claude-agents and installs its agents
 #      directly into ~/.claude/agents/. Any file there that would be replaced,
@@ -61,7 +61,7 @@ main() {
     *) echo "usage: install.sh [--uninstall]" >&2; exit 2 ;;
   esac
 
-  local repo_url="${CLAUDE_AGENTS_REPO:-https://github.com/gozcu/claude-agents-.git}"
+  local repo_url="${CLAUDE_AGENTS_REPO:-https://github.com/gozcu/claude-subagents.git}"
   local branch="${CLAUDE_AGENTS_BRANCH:-main}"
   local dir="${CLAUDE_AGENTS_DIR:-$HOME/.claude/claude-agents}"
   local agents_dir="$HOME/.claude/agents"

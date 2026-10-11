@@ -33,7 +33,7 @@ main() {
   local hook=""
   if [ "${1:-}" = "--hook" ]; then hook="--hook"; shift; fi
   local repo="${1:-${CLAUDE_AGENTS_DIR:-$HOME/.claude/claude-agents}}"
-  local repo_url="${CLAUDE_AGENTS_REPO:-https://github.com/gozcu/claude-agents-.git}"
+  local repo_url="${CLAUDE_AGENTS_REPO:-https://github.com/gozcu/claude-subagents.git}"
   local branch lock
 
   # Never hang a session waiting for credentials or a slow network.
