@@ -41,7 +41,7 @@ When escalating, reply with exactly:
 
 ```
 ESCALATE: <one-line reason>
-Suggested agent: implementer | debugger | architect | database-ops | data-pipeline
+Suggested agent: implementer | debugger | architect | database-ops | data-pipeline | devops
 ```
 
 ## Rules

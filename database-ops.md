@@ -1,6 +1,6 @@
 ---
 name: database-ops
-description: Use for database work - slow query analysis and tuning, indexes, query plans, schema design and review, migrations, and OLTP or OLAP engine configuration (e.g. PostgreSQL, MySQL, SQLite, SQL Server, ClickHouse, StarRocks, Snowflake, BigQuery). Do NOT use for pipeline job logic (data-pipeline).
+description: Use for database work - slow query analysis and tuning, indexes, query plans, schema design and review, migrations, and OLTP or OLAP engine configuration (e.g. PostgreSQL, MySQL, SQLite, SQL Server, ClickHouse, StarRocks, Snowflake, BigQuery). Do NOT use for pipeline job logic in Spark, Flink, Kafka, Airflow or dbt (data-pipeline), or application feature code (implementer).
 model: sonnet
 effort: high
 color: green
@@ -40,6 +40,15 @@ Identify the engine and version, then read the schema, ORM models, existing migr
 
 ```
 DECISION NEEDED: <the decision in one line>
+```
+
+## Out of scope
+
+If the task is pipeline job logic, a general application bug, or a design change across modules, stop without changes and reply with:
+
+```
+ESCALATE: <one-line reason>
+Suggested agent: data-pipeline | debugger | architect | implementer
 ```
 
 ## Response format

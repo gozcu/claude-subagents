@@ -32,6 +32,15 @@ DECISION NEEDED: <the decision in one line>
 
 - State assumptions and residual risks explicitly. Do not claim guarantees you have not verified.
 
+## Out of scope
+
+If the task is a routine feature, a single-service bug, or a mechanical edit, stop without changes and reply with:
+
+```
+ESCALATE: <one-line reason>
+Suggested agent: implementer | debugger | architect | quick-fixer
+```
+
 ## Response format
 
 ```
