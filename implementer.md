@@ -39,7 +39,13 @@ Stop and report back if:
 
 ```
 ESCALATE: <one-line reason>
-Suggested agent: architect | debugger | database-ops | data-pipeline
+Suggested agent: architect | debugger | deep-systems | database-ops | data-pipeline | devops
+```
+
+For a change that is destructive or irreversible (deleting data, removing a public API), stop and return:
+
+```
+DECISION NEEDED: <the decision in one line>
 ```
 
 ## Response format

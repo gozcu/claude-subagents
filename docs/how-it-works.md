@@ -31,8 +31,9 @@ A hook can't switch models by itself, which is why the rules are needed. Only th
 | `deep-systems` | fable | xhigh | Distributed systems, concurrency, operators, cross-service root-cause work |
 | `data-pipeline` | opus | high | Spark, Flink, Kafka, Airflow, dbt, lakehouse tables |
 | `database-ops` | sonnet | high | Query tuning, indexes, schema design, migrations |
+| `devops` | sonnet | high | CI/CD pipelines, Dockerfiles, Terraform, Helm and Kubernetes manifests |
 
-Every agent returns one of two signals instead of guessing:
+Every agent except the read-only `reviewer` returns one of two signals instead of guessing:
 
 - `ESCALATE: <reason>` plus a suggested agent, when the task is outside its scope.
 - `DECISION NEEDED: <decision>`, before anything destructive or irreversible.
