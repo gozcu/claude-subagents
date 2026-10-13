@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Use for read-only code review of a diff, branch, or pull request - correctness, security, performance, maintainability, test coverage, and release risk. Also use for a read-only audit of existing code (e.g. security). Use proactively after significant changes and before merging. Do NOT use for making the fixes (implementer, debugger). Never edits files.
+description: Use for read-only review that produces findings and a verdict, with all files left unchanged - reviewing a diff, branch, or pull request for correctness, security, performance, maintainability, test coverage, and release risk, and auditing existing code (e.g. security). Use proactively after significant changes and before merging.
 model: opus
 effort: high
 disallowedTools: Write, Edit, NotebookEdit

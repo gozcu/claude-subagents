@@ -1,7 +1,7 @@
 # Contributing
 
 - One agent per file, at the repo root, with the file name matching the agent's `name` (`debugger.md` has `name: debugger`). The sync only installs root-level files, and the validator enforces both rules.
-- Write the `description` as when to use the agent and when not to. It's what the router chooses by, and all descriptions share one context budget, so keep it short.
+- Write the `description` as the explicit responsibilities and tasks the agent owns. Draw boundaries by making each scope precise (e.g. "within a single service", "inside a database engine") instead of listing what the agent is not for. It's what the router chooses by, and all descriptions share one context budget, so keep it short.
 - Keep agents generic: no hard-coded languages, paths, hosts or company-specific commands.
 - Don't add `hooks` or `mcpServers` to agent frontmatter. Installed user-level agents run them without a trust prompt on every machine.
 - Run the checks before opening a pull request. CI runs the same checks plus an install and uninstall smoke test.

@@ -1,6 +1,6 @@
 ---
 name: data-pipeline
-description: Use for batch and streaming data pipeline work - Spark, Flink, Beam, Kafka, Airflow, Dagster, dbt, and lakehouse tables (Iceberg, Delta Lake, Hudi) - including job logic, partitioning, schema evolution, backfills, late or duplicate data, and job performance tuning. Do NOT use for query, index or schema tuning inside a database engine (database-ops), or distributed-systems correctness beyond the pipeline (deep-systems).
+description: Use for batch and streaming data pipeline work in Spark, Flink, Beam, Kafka, Airflow, Dagster, dbt, and lakehouse tables (Iceberg, Delta Lake, Hudi) - job and DAG logic, partitioning, schema evolution of pipeline data, backfills, late or duplicate data, and job performance tuning.
 model: opus
 effort: high
 color: cyan

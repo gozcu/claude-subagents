@@ -1,6 +1,6 @@
 ---
 name: database-ops
-description: Use for database work - slow query analysis and tuning, indexes, query plans, schema design and review, migrations, and OLTP or OLAP engine configuration (e.g. PostgreSQL, MySQL, SQLite, SQL Server, ClickHouse, StarRocks, Snowflake, BigQuery). Do NOT use for pipeline job logic in Spark, Flink, Kafka, Airflow or dbt (data-pipeline), or application feature code (implementer).
+description: Use for work inside a database engine - slow query analysis and tuning, indexes, query plans, schema design and review, migration scripts, and OLTP or OLAP engine configuration (e.g. PostgreSQL, MySQL, SQLite, SQL Server, ClickHouse, StarRocks, Snowflake, BigQuery).
 model: sonnet
 effort: high
 color: green

@@ -1,6 +1,6 @@
 ---
 name: debugger
-description: Use for diagnosing and fixing bugs in existing code - failing tests, errors and stack traces, regressions, flaky behaviour, or wrong output - where finding the root cause matters. Do NOT use for new features (implementer) or failures spanning distributed components and failure modes (deep-systems).
+description: Use for diagnosing and fixing bugs in existing code within a single service or codebase - failing tests, errors and stack traces, regressions, flaky behaviour, or wrong output - where the cause is unknown and finding the root cause is the job.
 model: sonnet
 effort: high
 color: red
