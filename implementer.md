@@ -1,6 +1,6 @@
 ---
 name: implementer
-description: Use for well-specified feature work with a clear, known approach - adding an endpoint, a UI component, a CLI flag, a config option, or a function with tests - usually within one module or a few related files. Do NOT use for diagnosing bugs (debugger), cross-module refactors or design decisions (architect), or trivial mechanical edits (quick-fixer).
+description: Use for building new, well-specified functionality with a clear, known approach, within one module or a few related files - adding an endpoint, a UI component, a CLI flag, a config option, or a function, together with its tests.
 model: sonnet
 effort: medium
 color: blue

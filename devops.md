@@ -1,6 +1,6 @@
 ---
 name: devops
-description: Use for CI/CD pipelines, Dockerfiles and container builds, infrastructure as code (Terraform, Helm, Kubernetes manifests, CloudFormation), build and release tooling, and deployment configuration - writing, fixing and reviewing the files. Do NOT use for application feature code (implementer), Kubernetes controllers/operators or distributed-systems correctness (deep-systems), or database schema work (database-ops).
+description: Use for writing, fixing and reviewing build, delivery and infrastructure definition files - CI/CD pipelines, Dockerfiles and container builds, infrastructure as code (Terraform, Helm charts, Kubernetes manifests, CloudFormation), build and release tooling, and deployment configuration.
 model: sonnet
 effort: high
 ---

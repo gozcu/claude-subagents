@@ -1,6 +1,6 @@
 ---
 name: deep-systems
-description: Use for the hardest engineering problems - distributed systems and concurrency (consensus, leader election, partitions, split-brain, exactly-once, idempotency), infrastructure controllers and operators, root-cause investigations across services, and correctness under failure. Suited to long, ambiguous, autonomous work. Do NOT use for routine features or single-service bugs.
+description: Use for the hardest engineering problems, where correctness under failure across multiple nodes or services is the core of the task - distributed systems and concurrency (consensus, leader election, partitions, split-brain, exactly-once, idempotency), code for infrastructure controllers and operators, and root-cause investigations spanning several services. Suited to long, ambiguous, autonomous work.
 model: fable
 effort: xhigh
 color: orange

@@ -1,6 +1,6 @@
 ---
 name: quick-fixer
-description: Use for small, mechanical, low-risk changes with one obvious correct result - renames, typo fixes, formatting, import cleanup, constant or config value changes, converting data between formats (e.g. log line to JSON, CSV to JSON), and simple lookups like "where is X defined". Do NOT use for bugs that need diagnosis, new features, multi-module refactors, production data, migrations, deletes, auth or permissions, or tasks where the approach is unclear.
+description: Use for small, mechanical, low-risk edits where the exact change is stated and has one obvious correct result, touching at most 3 files and about 30 lines of source, docs or local config - renames, typo fixes, formatting, import cleanup, constant or config value changes, converting given data between formats (e.g. log line to JSON, CSV to JSON), and simple lookups like "where is X defined".
 model: haiku
 effort: low
 tools: Read, Grep, Glob, Edit
